@@ -1,16 +1,16 @@
 #pragma once
-#include <vector>
 #include <string>
+#include <utility>
 
 
-class book{
+class Book{
     private:
         std::string title;
         std::string author;
         std::string bookId;
         bool isAvailable;
     public:
-        book(std::string title, std::string author, std::string bookId, bool isAvailable):
+        Book(std::string title, std::string author, std::string bookId, bool isAvailable):
         title(std::move(title)),author(std::move(author)),bookId(std::move(bookId)), isAvailable(isAvailable){}
 
         void setAvailability(bool status) { isAvailable = status; }
@@ -22,5 +22,4 @@ class book{
         const std::string& getBookId() const { return bookId; }
         bool getAvailability() const { return isAvailable; }
 
-        ~book() = default;
 };
