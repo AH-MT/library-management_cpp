@@ -7,7 +7,7 @@ class Person{
         std::string name;
         const std::string id;
     public:
-        Person(std::string name, std::string id):name(name),id(id){}
+        Person(std::string name, std::string id):name(std::move(name)),id(std::move(id)){}
         //getters
         std::string getName()const;
         std::string getId()const;
