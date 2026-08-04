@@ -12,8 +12,8 @@ class Person{
         //getters
         std::string getName()const;
         std::string getId()const;
-        virtual void displayInfo()const;
-        virtual std::string getRole()const;
+        virtual void displayInfo()const = 0;
+        virtual std::string getRole()const = 0;
         
         //setters
         void setName(const std::string& name);
