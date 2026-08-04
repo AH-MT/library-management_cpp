@@ -1,24 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-
-
-class Person{
-    protected:
-        std::string name;
-        const std::string id;
-    public:
-        Person(std::string name, std::string id):name(name),id(id){}
-        //getters
-        std::string getName()const;
-        std::string getId()const;
-        virtual void displayInfo()const = 0;
-        virtual std::string getRole()const = 0;
-        
-        //setters
-        void setName(const std::string& name);
-        virtual ~Person(){}
-    };
+#include "person.h"
 
 class Librarian : public Person{
     private:
@@ -43,7 +26,7 @@ class Member : public Person{
         void hasBorrowedBook();
         bool canBorrow()const;
         std::vector<std::string> getBorrowedBooks()const;
-        int getBorrowedCount();
+        int getBorrowedCount()const;
 
         void displayInfo() const override;
         std::string getRole() const override;
