@@ -3,17 +3,22 @@
 #include <string>
 #include <vector>
 
-void Member::borrowBook(){
-
+void Member::borrowBook(const Book* book){
+    borrowedISBNs.push_back(book->getBookId());
 }
-void Member::returnBook(){
-
+void Member::returnBook(const Book* book){
+    for(int i=0; i<borrowedISBNs.size(); i++){
+        if(book->getBookId() == borrowedISBNs[i]){
+            borrowedISBNs.erase(borrowedISBNs.begin() + i);
+            return;
+        }
+    }
 }
 void Member::hasBorrowedBook(){
 
 }
 bool Member::canBorrow()const {
-
+    return borrowedISBNs.size() < 4;
 }
 std::vector<std::string> Member::getBorrowedBooks()const{
 
@@ -26,4 +31,7 @@ void Member::displayInfo() const{
 }
 std::string Member::getRole() const{
     return "Member";
+}
+std::string Member::getId()const{
+    return this->id;
 }
