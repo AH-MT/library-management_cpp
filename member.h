@@ -6,16 +6,18 @@
 
 class Member : public Person{
     private:
-        std::vector<std::string> borrowedISBNs;
+        std::vector<int> borrowedISBNs;
+    
+
     public:
-        Member(std::string name, std::string id):Person(name,id){}
+        Member(std::string name_t, int id_t):Person(name_t,id_t){}
         void borrowBook(const Book* book);
         void returnBook(const Book* book);
-        void hasBorrowedBook();
+        //void hasBorrowedBook();
         bool canBorrow()const;
-        std::vector<std::string> getBorrowedBooks()const;
-        int getBorrowedCount()const;
-        std::string getId()const;
+        //std::vector<std::string> getBorrowedBooks()const;
+        //int getBorrowedCount()const;
+        int getId()const;
         void displayInfo() const override;
         std::string getRole() const override;
 
