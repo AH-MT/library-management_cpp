@@ -1,15 +1,17 @@
 #pragma once
 #include <string>
 #include <utility>
+
+
 class Book{
     private:
         std::string title;
         std::string author;
-        std::string bookId;
+        int bookId;
         bool isAvailable;
     public:
-        Book(std::string title, std::string author, std::string bookId, bool isAvailable):
-        title(std::move(title)),author(std::move(author)),bookId(std::move(bookId)), isAvailable(isAvailable){}
+        Book(std::string title_t, std::string author_t, int bookId_t, bool isAvailable_t):
+        title(std::move(title_t)),author(std::move(author_t)),bookId(bookId_t), isAvailable(isAvailable_t){}
 
         void setAvailability(bool status) { isAvailable = status; }
         void setTitle(std::string newTitle) { title = std::move(newTitle); }
@@ -17,7 +19,7 @@ class Book{
 
         const std::string& getTitle() const { return title; }
         const std::string& getAuthor() const { return author; }
-        const std::string& getBookId() const { return bookId; }
+        const int& getBookId() const { return bookId; }
         bool getAvailability() const { return isAvailable; }
 
 };
