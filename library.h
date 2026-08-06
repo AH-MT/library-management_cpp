@@ -5,24 +5,25 @@
 #include <string>
 #include <vector>
 
-
 class Library{
     private:
         std::vector<Book> books;
         std::vector<Member> members;
+        int nextBookId = 1;
+        int nextMemberId = 1;
     public:
-        void addBook(const Book& book);
-        bool removeBook(const std::string& bookId);
-        void addMember(const Member& member);
-        bool removeMember(const std::string& memberId);
-        Book* findBookById(const std::string& bookId);
-        Member* findMemberById(const std::string& memberId);
-        bool borrowBook(const std::string& bookId, const std::string& memberId);
-        bool returnBook(const std::string& bookId, const std::string& memberId);
+        void addBook(const std::string& title, const std::string& author);
+        bool removeBook(const int& bookId);
+        void addMember(const std::string& name);
+        bool removeMember(const int& memberId);
+        Book* findBookById(const int& bookId);
+        Member* findMemberById(const int& memberId);
+        bool isMemberById(const int& memberId);
+        bool borrowBook(const int&, const int& memberId);
+        bool returnBook(const int& bookId, const int& memberId);
         void displayAllBooks();
-        void displayAvailableBooks();
         void displayAllMembers();
-
-
-
+        int memberIdMaker();
+        int bookIdMaker();
+        void displayAvBooks();
 };
