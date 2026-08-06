@@ -1,11 +1,20 @@
 #include "library.h"
 #include <iostream>
 #include <algorithm>
-
-void Library::addBook(const Book& book){
-    books.push_back(book);
+int Library::memberIdMaker(){
+    nextMemberId++;
+    return nextMemberId -1;
 }
-bool Library::removeBook(const std::string& bookId){
+int Library::bookIdMaker(){
+    nextBookId++;
+    return nextBookId -1;
+}
+void Library::addBook(const std::string& title, const std::string& author){
+    Book book(title,author,this->bookIdMaker(),true);
+    books.push_back(book);
+    std::cout<<"book secsessfully added."<<std::endl;
+}
+bool Library::removeBook(const int& bookId){
     for(int i=0; i<books.size(); i++){
         if (books[i].getBookId() == bookId){
             if(books[i].getAvailability() == false){
@@ -17,10 +26,12 @@ bool Library::removeBook(const std::string& bookId){
     }
     return false;
 }
-void Library::addMember(const Member& member){
+void Library::addMember(const std::string& name){
+        int id = this->memberIdMaker();
+        Member member(name,id);
         members.push_back(member);
 }
-bool Library::removeMember(const std::string& memberId){
+bool Library::removeMember(const int& memberId){
     for(int i=0; i<members.size(); i++){
         if (members[i].getId() == memberId){
             members.erase(members.begin() + i);
@@ -29,7 +40,7 @@ bool Library::removeMember(const std::string& memberId){
     }
     return false;
 }
-Book* Library::findBookById(const std::string& bookId){
+Book* Library::findBookById(const int& bookId){
     for(int i=0; i<books.size(); i++){
         if (books[i].getBookId() == bookId){
             return &books[i];
@@ -37,7 +48,7 @@ Book* Library::findBookById(const std::string& bookId){
     }
     return nullptr;
 }
-Member* Library::findMemberById(const std::string& memberId){
+Member* Library::findMemberById(const int& memberId){
     for(int i=0; i<members.size(); i++){
         if (members[i].getId() == memberId){
             return &members[i];
@@ -45,7 +56,15 @@ Member* Library::findMemberById(const std::string& memberId){
     }
     return nullptr;
 }
-bool Library::borrowBook(const std::string& bookId, const std::string& memberId){
+bool Library::isMemberById(const int& memberId){
+    for(int i=0; i<members.size(); i++){
+        if (members[i].getId() == memberId){
+            return true;
+        }
+    }
+    return false;
+}
+bool Library::borrowBook(const int& bookId, const int& memberId){
     Book* book = findBookById(bookId);
     Member* member = findMemberById(memberId);
     if(book == nullptr){
@@ -69,7 +88,7 @@ bool Library::borrowBook(const std::string& bookId, const std::string& memberId)
     std::cout << "Book " << book->getTitle() << " successfully borrowed by Member " << memberId << "." << std::endl;
     return true;
 }
-bool Library::returnBook(const std::string& bookId, const std::string& memberId){
+bool Library::returnBook(const int& bookId, const int& memberId){
     Book* book = findBookById(bookId);
     Member* member = findMemberById(memberId);
     if(book == nullptr){
@@ -97,6 +116,14 @@ void Library::displayAllMembers(){
 }
 void Library::displayAllBooks(){
     for(int i=0; i<books.size(); i++){
-        std::cout<<i+1<<"| "<<"title: "<<books[i].getTitle()<<" - "<<"author: "<<books[i].getAuthor()<<std::endl;
+        std::cout<<i+1<<"| "<<"title: "<<books[i].getTitle()<<" - "<<"author: "<<books[i].getAuthor()<<" - "<<"book id: "<<books[i].getBookId()
+        <<" - avalability: "<<books[i].getAvailability()<<std::endl;
+    }
+}
+void Library::displayAvBooks(){
+    for(int i=0; i<books.size(); i++){
+        if(books[i].getAvailability()){
+        std::cout<<i+1<<"| "<<"title: "<<books[i].getTitle()<<" - "<<"author: "<<books[i].getAuthor()<<" - "<<"book id: "<<books[i].getBookId()<<std::endl;
+        }
     }
 }
