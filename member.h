@@ -7,10 +7,10 @@
 class Member : public Person{
     private:
         std::vector<int> borrowedISBNs;
+        std::string role = "Member";
     
-
     public:
-        Member(std::string name_t, int id_t):Person(name_t,id_t){}
+        Member(std::string name_t, int id_t, int pasword_t):Person(name_t,id_t, pasword_t){}
         void borrowBook(const Book* book);
         void returnBook(const Book* book);
         //void hasBorrowedBook();
@@ -20,6 +20,6 @@ class Member : public Person{
         int getId()const;
         void displayInfo() const override;
         std::string getRole() const override;
-
+        const std::vector<int>* getBooks() const;;
         ~Member()override{}
 };
