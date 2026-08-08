@@ -2,7 +2,6 @@
 #include <string>
 #include <utility>
 
-
 class Book{
     private:
         std::string title;
