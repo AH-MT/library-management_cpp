@@ -6,9 +6,12 @@
 std::string Person::getName() const {
     return this->name;
 }
-std::string Person::getId() const {
+int Person::getId() const {
     return this->id;
 }
-void Person::setName(const std::string& name){
-    this->name = name;
+int Person::getPassword() const {
+    return this->password;
+}
+void Person::setName(const std::string& name_t){
+    this->name = name_t;
 }
