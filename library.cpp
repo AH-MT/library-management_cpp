@@ -26,9 +26,9 @@ bool Library::removeBook(const int& bookId){
     }
     return false;
 }
-void Library::addMember(const std::string& name){
+void Library::addMember(const std::string& name, const int password){
         int id = this->memberIdMaker();
-        Member member(name,id);
+        Member member(name,id,password);
         members.push_back(member);
 }
 bool Library::removeMember(const int& memberId){
@@ -126,4 +126,43 @@ void Library::displayAvBooks(){
         std::cout<<i+1<<"| "<<"title: "<<books[i].getTitle()<<" - "<<"author: "<<books[i].getAuthor()<<" - "<<"book id: "<<books[i].getBookId()<<std::endl;
         }
     }
+}
+
+bool Library::checkMember(const int &id, const int &password) {
+    for(int i=0; i<members.size(); i++) {
+        if(members[i].getId() == id) {
+            if (members[i].getPassword() == password) {
+                std::cout<<"loged in"<<std::endl;
+                return true;
+            }
+            else {
+                std::cout<<"Wrong password"<<std::endl;
+                return false;
+            }
+        }
+    }
+    std::cout<<"There is no such member."<<std::endl;
+    return false;
+}
+const std::vector<Member>* Library::getAllMembers() const{
+    return &this->members;
+}
+const std::vector<Book>* Library::getAllBooks() const{
+    return &this->books;
+}
+void Library::addMember_f(const int& id,const std::string& name, const int& password, std::vector<int>& book_id) {
+    Member newMember(name, id, password);
+    members.push_back(newMember);
+    for (int i : book_id) {
+        Book* book = findBookById(i);
+        if (book != nullptr) {
+            newMember.borrowBook(book);
+        }
+    }
+    nextMemberId++;
+}
+void Library::addBook_f(const int& id,const std::string& title, const std::string& author, const bool& available) {
+    Book book(title,author, id, available);
+    books.push_back(book);
+    nextBookId++;
 }
