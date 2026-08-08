@@ -23,3 +23,6 @@ std::string Member::getRole() const{
 int Member::getId()const{
     return this->id;
 }
+const std::vector<int>* Member::getBooks() const{
+    return &borrowedISBNs;
+}
